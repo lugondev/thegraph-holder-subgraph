@@ -1,0 +1,29 @@
+type Holder @entity {
+	id: ID!
+	sentCount: Int!
+	receivedCount: Int!
+	tokens: [Token!]! @derivedFrom(field: "owner")
+	balance: Int!
+}
+
+type Transfer @entity {
+	id: ID!
+	tokenId: BigInt! # uint256
+	from: Bytes! # address
+	to: Bytes! # address
+	timestamp: BigInt!
+}
+
+type Token @entity {
+	id: ID!
+	owner: Holder! # address
+	latestTx: Bytes! # address
+	transfersCount: BigInt!
+	updatedAt: BigInt!
+}
+
+type Info @entity {
+	id: ID!
+	totalSupply: BigInt!
+	txns: BigInt!
+}
