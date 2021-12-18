@@ -35,10 +35,10 @@ function updateInfo(address: Address): void {
 
 export function handleTransferTemplate(event: Transfer): void {
 
-    log.info("handle transfer template", [
-        event.params.from.toString(),
-        event.params.tokenId.toString(),
-        event.params.to.toString(),
+    log.debug("handle transfer template: from {} to {} id {}", [
+        event.params.from.toHexString(),
+        event.params.to.toHexString(),
+        event.params.tokenId.toHexString(),
     ])
 
     handleTransfer(event)
@@ -46,11 +46,6 @@ export function handleTransferTemplate(event: Transfer): void {
 
 export function handleTransfer(event: Transfer): void {
     updateInfo(event.address)
-    log.info("handle transfer", [
-        event.params.from.toString(),
-        event.params.tokenId.toString(),
-        event.params.to.toString(),
-    ])
 
     if (event.params.from != Address.zero()) {
         let from = getHolder(event.params.from.toHex())
